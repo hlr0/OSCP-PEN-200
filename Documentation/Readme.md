@@ -203,6 +203,7 @@ Learn to use the below tools
 - impacket-getnpusers
 - impacket-getusersspn
 - Evil-winrm
+- xfreerdp
 - *Mimikatz*
 - Rubeus
 - Bloodhound
