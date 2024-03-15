@@ -216,7 +216,10 @@ Learn to use the below tools
   - When you think of Kerberoasting think - user has a SPN - ""Service Prinicipal Name"" associated with it - then crack the hash - need access to domain or domain creditionals 
 - ### ASREPROASTING 
   - When you think of ASREPROASTING think - Kerberos Pre-authentication is disabled - then crack the hash
-- LLMNR
-- PASSWORD SPRAYING
-- LSASS
+- ### LLMNR
+  - ***
+- ### PASSWORD SPRAYING
+  - ***
+- ### LSASS
+  - ***
 
