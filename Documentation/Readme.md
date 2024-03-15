@@ -199,6 +199,7 @@ Learn to use the below tools
 - rpcclient
 - Ldapsearch
 - enum4linux
+- kerbrute
 - impacket-getnpusers
 - impacket-getusersspn
 - Evil-winrm
