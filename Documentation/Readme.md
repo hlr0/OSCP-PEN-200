@@ -159,6 +159,7 @@ Environment: Search from HacktheBox
   - Ip Addresses and domain users
   - Subnet information
   - Network topology
+  - Service information
   - Domain Controller details
   - Dns server information
        
