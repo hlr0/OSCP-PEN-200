@@ -198,6 +198,7 @@ Learn to use the below tools
 - Crackmapexec / psexec
 - rpcclient
 - Ldapsearch
+- enum4linux
 - impacket-getnpusers
 - impacket-getusersspn
 - Evil-winrm
