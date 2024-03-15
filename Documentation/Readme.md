@@ -72,20 +72,6 @@ but placing a file in it will not get executed. That would be the group policy t
 
 All domain Group Policies are stored here: \\<DOMAIN>\SYSVOL\<DOMAIN>\Policies\
 
-
-
----------------------------------------------------------------
----------------------------------------------------------------
----------------------------------------------------------------
-# Methodology
----------------------------------------------------------------
-- Domain Enumeration = get all information
-- Escalate Priveleges = hunting for local or admin privileges
-- Persistance = make kerberoast or asreproasting
-- Data exfiltration = denial of service, or any other target
-
-
-
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -157,6 +143,68 @@ ReadGMSAPassword allows an attacker to use the password of a Group Managed Servi
 
 Environment: Search from HacktheBox
 
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+# Methodology
+---------------------------------------------------------------
+- Domain Enumeration = get all information
+- Escalate Priveleges = hunting for local or admin privileges
+- Persistance = make kerberoast or asreproasting
+- Data exfiltration = denial of service, or any other target
+
+# Enumeration Methodology
+
+- Step 1 - Information Gathering
+  - Ip Addresses and domain users
+  - Subnet information
+  - Network topology
+  - Domain Controller details
+  - Dns server information
+       
+- Step 2 - Enumerate Users
+  - Nmap Scanning: Use Nmap to identify open ports on the target systems, particularly the domain controllers. Run a command like nmap -p 139,445 -T4 -v -oA nmap_scan <target>.
+  - NetBIOS Enumeration: Use tools like enum4linux or nbtscan to enumerate NetBIOS information, including users and shares.
+  - LDAP Enumeration: Enumerate users and groups using LDAP queries. Tools like ldapsearch can be handy. For example: ldapsearch -x -h <domain_controller> -b "dc=<target_dc>,dc=com" -D "<your_user>" -W.
+ 
+- Step 3 - Enumerate Groups
+  - Net Group Enumeration: Utilize the net command to enumerate groups. For example: net group /domain.
+  - PowerShell Enumeration: Run PowerShell scripts to list all Active Directory groups. For example: Get-ADGroup -Filter * | Select-Object Name.
+
+- Step 4 - Enumerate Shares & Permissions
+  - Enum4linux: Use enum4linux to enumerate shares, SIDs, and permissions on the target system.
+  - Accesschk: Run tools like accesschk to check for misconfigured permissions and find vulnerabilities.
+    
+- Step 5 - Enumerate Resources
+  - SMB Shares Enumeration: Use tools like smbclient or smbmap to list accessible SMB shares.
+  - Kerberos Enumeration: Enumerate service principals using tools like Kerbrute to identify potential attack vectors.
+
+- Step 6 - Enumerate Trust Relationships
+  - Use the nltest or netdom command to identify trust relationships between domains.
+
+- Step 7 - Document and Report
+  - always remember to take screenshots and document findings
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+# Tools for Active Directory
+
+Learn to use the below tools
+
+- smbmap
+- smbclient
+- Crackmapexec / psexec
+- rpcclient
+- Ldapsearch
+- impacket-getnpusers
+- impacket-getusersspn
+- Evil-winrm
+- *Mimikatz*
+- Rubeus
+- Bloodhound
+
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -171,20 +219,4 @@ Environment: Search from HacktheBox
 - LLMNR
 - PASSWORD SPRAYING
 - LSASS
-
-
----------------------------------------------------------------
----------------------------------------------------------------
----------------------------------------------------------------
----------------------------------------------------------------
-# Tools for Active Directory
-
-- Crackmapexec
-- PSexec
-- Evil-winrm
-- Ldapsearch
-- *Mimikatz*
-- Rubeus
-- Bloodhound
-
 
